@@ -1,0 +1,140 @@
+-- to create database
+create database swaroop;
+use swaroop;
+create table employeedetails
+(id int,
+name varchar(60),
+gmail varchar(60)
+
+);
+
+insert into employeedetails values
+(1,"jennie","jennie16@gmail.com"),
+(2,"lisa","lisa26@gmail.com"),
+(3,"jisoo","jisoo14@gmail.com"),
+(4,"rose","rose15@gmail.com"),
+(5,"bright","bright27@gmail.com"),
+(6,"win","win21@gmail.com"),
+(7,"prim","prim20@gmail.com"),
+(8,"nnevy","nnevy1@gmail.com"),
+(9,"hope","hope18@gmail.com"),
+(10,"jin","jin23@gmail.com");
+select * from employeedetails;
+alter table employeedetails add markks int;
+alter table employeedetails change marks percentage int;
+alter table employeedetails drop markks;
+update employeedetails set percentage=90 where id=1;
+delete from employeedetails where id=10;
+create table aggregationtable
+(
+id int auto_increment,name varchar(60),gmail varchar(60),age int,marks int,primary key(id)
+);
+insert into aggregationtable
+(
+name,gmail,age,marks
+)
+values
+
+("jennie","jennie16@gmail.com",27,99),
+("taehyung","tae27@gmail.com",27,98),
+("jk","jk01@gmail.com",26,100),
+("jimin","jimin13@gmail.com",28,100),
+("bright","bright30@gmail.com",26,100),
+("lisa","lisa26@gmail.com",26,95),
+("rose","rose03@gmail.com",26,94),
+("hope","hope18@gmail.com",29,100),
+("jin","jin@gmail.com",30,97),
+("suga","suga10@gmail.com",30,99),
+("rm","rm@gmail.com",29,99),
+("jisoo","jisoo@gmail.com",28,99);
+select *from aggregationtable;
+select count(*) as numberofrecords from aggregationtable;
+select avg(marks) as numberofaveragemarks from aggregationtable;
+select min(marks) as numberofminimummarks from aggregationtable;
+select max(marks) as numberofmaximummarks from aggregationtable;
+select distinct(marks) as numberofdistinctmarks from aggregationtable;
+select * from aggregationtable where name like "%n";
+create table jt
+(id int auto_increment,name varchar(60),age int,primary key(id)
+);
+insert into jt
+(
+name,age
+)
+values
+("rohita",23),
+("namrata",23),
+("divya",24),
+("kusuma",24),
+("jk",26),
+("v",28),
+("hope",29),
+("bright",26),
+("win",24),
+("nnevy",26);
+select * from jt;
+create table sports
+(
+id int auto_increment,sportsname varchar(60),primary key (id)
+);
+insert into sports
+(
+sportsname
+)
+values
+("cricket"),
+("volleyball"),
+("badminton"),
+("golf"),
+("tennis");
+select * from sports;
+select * from jt as t1 left join sports as t2 on t1.id= t2.id;
+select * from jt order by id desc;
+select * from sports order by id asc;
+create table corelation
+(id int auto_increment,
+name varchar(60),
+age int,
+salary int,
+gender varchar(60),
+primary key (id));
+insert into corelation
+(
+name,age,salary,gender
+)
+values
+("sravan",25,2555,"male"),
+("binu",23,34546,"male"),
+("manu",23,5745,"male"),
+("uddu",23,764,"male"),
+("geetha",21,85764,"female"),
+("sravan",25,2555,"male"),
+("binu",23,34546,"male"),
+("manu",23,5745,"male"),
+("uddu",23,764,"male"),
+("geetha",21,85764,"female"),
+("sravan",25,2555,"male"),
+("binu",23,34546,"male"),
+("manu",23,5745,"male"),
+("uddu",23,764,"male"),
+("geetha",21,85764,"female"),
+("sravan",25,2555,"male"),
+("binu",23,34546,"male"),
+("manu",23,5745,"male"),
+("uddu",23,764,"male"),
+("geetha",21,85764,"female");
+select * from corelation;
+select salary as nthsalary from corelation as t1 where 0=(select count(*) from corelation as t2 where t1.salary<t2.salary);
+
+create view ss as select name,salary from corelation;
+select * from ss;
+
+create index india on jt (name);
+select * from jt;
+
+delimiter //
+create procedure em()
+begin
+select id,gender from corelation;
+end //
+call em
